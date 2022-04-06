@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html class="no-js" lang="sv">
+    <head>
+        {% block head %}
+            <meta charset="utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <link rel="stylesheet" href="styles/css/style.css"/>
+            <title>{% block title %}{% endblock %} | MVC</title>
+        {% endblock %}
+    </head>
+
+    <body>
+
+        <header>
+            {% block header %}
+                <span class="title">~ Hannas rapportsida ~</span>
+                <nav>   
+                    <a href="/">Hem</a>
+                    <a href="/about">Om mvc</a>
+                    <a href="/report">Rapporter</a>
+                </nav>
+            {% endblock %}
+        </header>
+
+        <div class="main">
+        {% block main %}
+        {% endblock %}
+        </div>
+
+        <footer>
+            {% block footer %}
+                <p>Hanna &copy; 2022 | <a href="" target="_blank">Github</a></p>
+            {% endblock %}
+        </footer>
+    </body>
+</html>

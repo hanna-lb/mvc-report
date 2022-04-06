@@ -1,0 +1,140 @@
+@import '../../../node_modules/normalize.css/normalize';
+@import url('https://fonts.googleapis.com/css2?family=Dosis&family=Open+Sans&display=swap');
+
+* {
+    box-sizing: border-box;
+    border: 0 none;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: auto;
+    max-width: 1200px;
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+    color: #363636;
+    line-height: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+html {
+    height: 100%;
+    overflow-y: scroll;
+    background-color: #f0abc5;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 0.6em;
+    font-weight: bold;
+    font-family: 'Dosis', sans-serif;
+}
+
+h1 {
+    margin-bottom: 1em;
+}
+
+p {
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+}
+
+header,
+footer {
+    flex: 0 0 auto;
+    color: #363636;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-bottom: 5px solid #f0abc5;
+
+    .title {
+        font-size: 2.5em;
+        font-weight: bolder;
+        padding: 1.5em;
+        font-family: 'Dosis', sans-serif;
+    }
+}
+
+nav {
+    background: #363636;
+    color: #f5f5f5;
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    
+    a {
+        color: #f5f5f5;
+        padding: 1em 1.5em;
+        font-size: 1.2em;
+        text-decoration: none;
+    }
+
+    a:hover {
+        background-color: #1b1b1b;
+        color: #f0abc5;
+    }
+}
+
+.main {
+    flex: 1 0 auto;
+    padding: 1.5em;
+    background-color: #f5f5f5;
+
+    p {
+        margin-bottom: 1em;
+    }
+
+    a {
+        color: #ff3da8;
+        font-size: 1.2em;
+    }
+    
+    a:hover {
+        color: #f0abc5;
+    }
+
+    article {
+        margin-bottom: 1.5em;
+    }
+}
+
+footer {
+    border-top: 5px solid #363636;
+    padding: 2em 1em;
+    
+    p { 
+        text-align: center;
+    }
+
+    a {
+        color: rgb(32, 32, 32);
+    }
+
+    a:hover {
+        color: #ff3da8;
+    }
+}
+
+img {
+    max-width: 100%;
+}
+
+.right {
+    float: right;
+    margin-left: 1.5em;
+}
+
+.left {
+    float: left;
+    margin-right: 1.5em;
+}
