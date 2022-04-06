@@ -9,38 +9,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class ReportController extends AbstractController
 {
     /**
-     * @Route("/")
+     * @Route("/", name="home")
      */
     public function home(): Response
     {
-        $number = random_int(0, 100);
-
-        return $this->render('home.html.twig', [
-            'number' => $number,
-        ]);
+        return $this->render('home.html.twig');
     }
 
     /**
-     * @Route("/about")
+     * @Route("/about", name="about")
      */
     public function about(): Response
     {
-        $number = random_int(0, 100);
-
-        return $this->render('about.html.twig', [
-            'number' => $number,
-        ]);
+        return $this->render('about.html.twig');
     }
 
     /**
-     * @Route("/report")
+     * @Route("/report", name="report")
      */
     public function report(): Response
     {
-        $number = random_int(0, 100);
-
-        return $this->render('report.html.twig', [
-            'number' => $number,
-        ]);
+        return $this->render('report.html.twig');
     }
 }

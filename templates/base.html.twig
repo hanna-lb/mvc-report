@@ -15,9 +15,9 @@
             {% block header %}
                 <span class="title">~ Hannas rapportsida ~</span>
                 <nav>   
-                    <a href="/">Hem</a>
-                    <a href="/about">Om mvc</a>
-                    <a href="/report">Rapporter</a>
+                    <a href="{{ path('home') }}">Hem</a>
+                    <a href="{{ path('about') }}">Om mvc</a>
+                    <a href="{{ path('report') }}">Rapporter</a>
                 </nav>
             {% endblock %}
         </header>
