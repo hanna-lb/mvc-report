@@ -8,19 +8,24 @@ class Deck
 {
     protected $colours = ["spades", "hearts", "clubs", "diamonds"];
     protected $values = ["E", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Kn", "D", "K"];
-    protected $cards = [];
+    protected $deck = [];
 
     public function __construct()
     {
         foreach ($this->colours as $colour) {
             foreach ($this->values as $value) {
-                $this->cards[] = new Card($colour, $value);
+                $this->deck[] = new Card($colour, $value);
             }
         }
     }
 
     public function getDeck()
     {
-        return $this->cards;
+        return $this->deck;
+    }
+
+    public function shuffle()
+    {
+        shuffle($this->deck);
     }
 }
