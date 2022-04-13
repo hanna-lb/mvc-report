@@ -1,0 +1,17 @@
+{# templates/card/home.html.twig #}
+{% extends "base.html.twig" %}
+
+{% block title %}Kmom02: Kort{% endblock %}
+
+{% block content %}
+<h1>Kort</h1>
+
+<p>Jag har byggt en kortlek med hjälp av php. Kortens grafik renderas med hjälp av css-klasser baserade på värden vi får från php:n.</p>
+<p>Kortlekens utseende är simplifierad med svitens symbol och färg. Benämningen för ess, knäckt, dam och kung har jag valt att ha på svenska.</p> 
+
+<h2>Länkar</h2>
+<ul>
+    <li><a href="{{path('card-deck')}}">Se hela kortleken (sorterad)</a></li>
+</ul>
+
+{% endblock %}
