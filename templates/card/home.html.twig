@@ -15,6 +15,7 @@
     <li><a href="{{path('card-deck-shuffle')}}">card/deck/shuffle</a> - Blanda kortleken</li>
     <li><a href="{{path('card-draw')}}">card/deck/draw</a> - Dra 1 kort</li>
     <li><a href="{{path('card-draw-number', {number: '0'})}}">card/deck/draw/:number</a> - Dra angivet antal kort</li>
+    <li><a href="{{path('card-deal', {players: '4', cards: '4'})}}">card/deck/deal/:players/:cards</a> - Dra angivet antal kort per angivet antal spelare</li>
 </ul>
 
 {% endblock %}

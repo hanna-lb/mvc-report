@@ -1,0 +1,55 @@
+{# templates/card/deal.html.twig #}
+{% extends "base.html.twig" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+
+<h1>{{ title }}</h1>
+
+<form method="post">
+    <fieldset>
+    <p>
+        <label>Antal spelare:
+            <input type="number" name="players" value="{{ players }}" max="52" min="0" step="1">
+        </label>
+    </p>
+    <p>
+        <label>Antal kort per spelare:
+            <input type="number" name="cards" value="{{ number }}" max="52" min="0" step="1">
+        </label>
+    </p>
+    <p>
+        <input type="submit" value="Nytt spel">
+    </p>
+    </fieldset>
+</form>
+
+<p>Du försöker dela ut {{ number }} kort per spelare.</p>
+<p>Kort kvar i kortleken: {{ count }}</p>
+
+{% if playerHands %}
+    {% for hand in playerHands %}
+    <div class="card-wrapper">
+        <h2>Spelare {{ loop.index }}</h2>
+        {% for card in hand %}
+        <div class="card {{ card.colour }}">
+            <div class="corner top">
+                {{ card.value }}
+                <div class="{{ card.colour }}"></div>
+            </div>
+            <div class="pip {{ card.colour }}"></div>
+            <div class="corner bottom">
+                {{ card.value }}
+                <div class="{{ card.colour }}"></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+{% endif %}
+<p></p>
+
+<p><a href="{{path('card-home')}}">Gå tillbaka till överblickssidan</a></p>
+
+{% endblock %}

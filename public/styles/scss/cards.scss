@@ -1,5 +1,9 @@
 $corner-margin: 8px;
 
+.card-wrapper {
+    margin-bottom: 0.5em;
+}
+
 .card {
     position: relative;
     display: inline-block;
@@ -77,7 +81,7 @@ $corner-margin: 8px;
     &.spades::before { content: '\02660'; }
     &.diamonds::before { content: '\02666'; }
     &.unknown::before { content: '?'; }
-    
+
     &.joker::before {
         content: '\01F0BF';
         color: rgb(255, 24, 24) !important;

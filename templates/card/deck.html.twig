@@ -6,7 +6,7 @@
 {% block content %}
 
 <h1>{{ title }}</h1>
-
+<div class="card-wrapper">
 {% for card in deck %}
     <div class="card {{ card.colour }}">
         <div class="corner top">
@@ -20,6 +20,7 @@
         </div>
     </div>
 {% endfor %}
+</div>
 
 {# <div class="card joker">
     <div class="corner top">Joker</div>

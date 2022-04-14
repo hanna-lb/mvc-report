@@ -124,4 +124,42 @@ class CardController extends AbstractController
 
         return $this->redirectToRoute('card-draw-number', ['number' => $number]);
     }
+
+    /**
+     * @Route("/card/deck/deal/:{players}/:{cards}", name="card-deal", methods={"GET","HEAD"})
+     */
+    public function deal($players, $cards): Response 
+    {
+        $deck = new \App\Card\Deck();
+        $deck->shuffle();
+
+        $playerHands = [];
+        
+        for ($i = 0; $i < $players; $i++) {
+            $playerHands[] = $deck->drawCard($cards);
+        }
+
+        $cardsLeft = $deck->countDeck();
+
+        $data = [
+            'title' => "Dela ut kort till spelare",
+            'playerHands' => $playerHands,
+            'players' => $players,
+            'number' => $cards,
+            'count' => $cardsLeft,
+        ];
+
+        return $this->render('card/deal.html.twig', $data);
+    }
+
+    /**
+     * @Route("/card/deck/deal/:{players}/:{cards}", name="card-deal-process", methods={"POST"})
+     */
+    public function dealProcess(Request $request, $players, $cards): Response 
+    {
+        $players = $request->request->get('players');
+        $cards = $request->request->get('cards');
+
+        return $this->redirectToRoute('card-deal', ['players' => $players, 'cards' => $cards]);
+    }
 }

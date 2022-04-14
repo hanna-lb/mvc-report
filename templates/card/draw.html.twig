@@ -10,23 +10,25 @@
 <p>Kort kvar i kortleken: {{ count }}</p>
 
 {% if drawnCards %}
-    <h2>Du drar 1 kort:</h2>
-    {% for card in drawnCards %}
-        <div class="card {{ card.colour }}">
-            <div class="corner top">
-                {{ card.value }}
-                <div class="{{ card.colour }}"></div>
-            </div>
-            <div class="pip {{ card.colour }}"></div>
-            <div class="corner bottom">
-                {{ card.value }}
-                <div class="{{ card.colour }}"></div>
-            </div>
+<h2>Du drar 1 kort:</h2>
+<div class="card-wrapper">
+{% for card in drawnCards %}
+    <div class="card {{ card.colour }}">
+        <div class="corner top">
+            {{ card.value }}
+            <div class="{{ card.colour }}"></div>
         </div>
-    {% endfor %}
-{% endif %}
-<p></p>
+        <div class="pip {{ card.colour }}"></div>
+        <div class="corner bottom">
+            {{ card.value }}
+            <div class="{{ card.colour }}"></div>
+        </div>
+    </div>
+{% endfor %}
+</div>
+
 <h2>Din hand:</h2>
+<div class="card-wrapper">
 {% for card in hand %}
     <div class="card {{ card.colour }}">
         <div class="corner top">
@@ -40,18 +42,8 @@
         </div>
     </div>
 {% endfor %}
-
-{# <div class="card joker">
-    <div class="corner top">Joker</div>
-    <div class="pip joker"></div>
-    <div class="corner bottom">Joker</div>
 </div>
-
-<div class="card back">
-    <div class="back">
-        <div class="pip unknown"></div>
-    </div>
-</div> #}
+{% endif %}
 
 <p><a href="{{path('card-home')}}">Gå tillbaka till överblickssidan</a></p>
 

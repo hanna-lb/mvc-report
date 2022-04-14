@@ -8,12 +8,12 @@ class Hand
 {
     protected $hand = [];
 
-    public function __construct($cards)
+    public function addCard(Card $card): void
     {
-        $this->hand = $cards;
+        $this->hand[] = $card;
     }
 
-    public function addCards($cards)
+    public function addCards(Deck $cards)
     {
         $this->hand[] = $cards;
 
