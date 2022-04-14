@@ -1,4 +1,4 @@
-{# templates/card/deck.html.twig #}
+{# templates/card/draw.html.twig #}
 {% extends "base.html.twig" %}
 
 {% block title %}{{ title }}{% endblock %}
@@ -7,6 +7,7 @@
 
 <h1>{{ title }}</h1>
 
+<h2>Din hand:</h2>
 {% for card in deck %}
     <div class="card {{ card.colour }}">
         <div class="corner top">
@@ -20,6 +21,8 @@
         </div>
     </div>
 {% endfor %}
+
+<h2>Kort kvar i kortleken: {{ count }}</h2>
 
 {# <div class="card joker">
     <div class="corner top">Joker</div>

@@ -28,4 +28,21 @@ class Deck
     {
         shuffle($this->deck);
     }
+
+    public function drawCard($quantity = 1)
+    {
+        $cards = [];
+        
+        if (count($this->deck) >= $quantity) {
+            $cards = array_splice($this->deck, 0, $quantity);
+        } else {
+            $cards = array_splice($this->deck, 0, count($this->deck));
+        }
+
+        return $cards;
+    }
+
+    public function countDeck() {
+        return count($this->deck);
+    }
 }
