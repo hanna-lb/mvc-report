@@ -5,6 +5,8 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -36,8 +38,9 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/shuffle", name="card-deck-shuffle")
      */
-    public function shuffleDeck(): Response
+    public function shuffleDeck(SessionInterface $session): Response
     {
+        $session->clear();
         $deck = new \App\Card\Deck();
         $deck->shuffle();
 
@@ -50,21 +53,75 @@ class CardController extends AbstractController
     }
 
     /**
-     * @Route("/card/deck/draw", name="card-deck-draw")
+     * @Route("/card/deck/draw", name="card-draw")
      */
-    public function draw(): Response
+    public function draw(SessionInterface $session): Response
     {
-        $deck = new \App\Card\Deck();
+        $deck = $session->get("deck") ?? new \App\Card\Deck();
         $deck->shuffle();
+
         $drawnCards = $deck->drawCard(1);
         $cardsLeft = $deck->countDeck();
 
+        $hand = $session->get("hand") ?? [];
+        $hand = array_merge($hand, $drawnCards);
+        
+        $session->set("deck", $deck);
+        $session->set("hand", $hand);
+
         $data = [
-            'title' => 'Du drar 1 kort',
-            'deck' => $drawnCards,
-            'count' => $cardsLeft
+            'title' => "Dra kort",
+            'drawnCards' => $drawnCards,
+            'hand' => $hand,
+            'count' => $cardsLeft,
+            'number' => '1'
         ];
 
         return $this->render('card/draw.html.twig', $data);
+    }
+
+    /**
+     * @Route("/card/deck/draw/:{number}", name="card-draw-number", methods={"GET","HEAD"})
+     */
+    public function drawNumber(SessionInterface $session, $number): Response 
+    {
+        $deck = $session->get("deck") ?? new \App\Card\Deck();
+        $deck->shuffle();
+
+        $drawnCards = $deck->drawCard($number);
+        $cardsLeft = $deck->countDeck();
+
+        $hand = $session->get("hand") ?? [];
+        $hand = array_merge($hand, $drawnCards);
+        
+        $session->set("deck", $deck);
+        $session->set("hand", $hand);
+
+        $data = [
+            'title' => "Dra kort",
+            'drawnCards' => $drawnCards,
+            'hand' => $hand,
+            'count' => $cardsLeft,
+            'number' => $number
+        ];
+
+        return $this->render('card/draw-number.html.twig', $data);
+    }
+
+    /**
+     * @Route("/card/deck/draw/:{number}", name="card-draw-process", methods={"POST"})
+     */
+    public function drawNumberProcess(Request $request, SessionInterface $session, $number): Response 
+    {
+        $draw = $request->request->get('draw');
+        $reset = $request->request->get('reset');
+
+        if ($reset) {
+            $session->clear();
+        } elseif ($draw) {
+            $number = $request->request->get('drawnumber');
+        }
+
+        return $this->redirectToRoute('card-draw-number', ['number' => $number]);
     }
 }

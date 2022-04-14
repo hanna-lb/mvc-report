@@ -7,10 +7,23 @@
 
 <h1>{{ title }}</h1>
 
-<p>Kort kvar i kortleken: {{ count }}</p>
+<form method="post">
+    <fieldset>
+    <p>Kort kvar i kortleken: {{ count }}</p>
+    <p>
+        <label>Ange hur många kort du vill dra:
+            <input type="number" name="drawnumber" value="{{ number }}" max="{{ count }}" min="0" step="1">
+        </label>
+    </p>
+    <p>
+        <input type="submit" name="draw" value="Dra kort">
+        <input type="submit" name="reset" value="Reset">
+    </p>
+    </fieldset>
+</form>
 
 {% if drawnCards %}
-    <h2>Du drar 1 kort:</h2>
+    <h2>Du försöker dra {{ number }} kort. Nya kort:</h2>
     {% for card in drawnCards %}
         <div class="card {{ card.colour }}">
             <div class="corner top">
