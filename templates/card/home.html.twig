@@ -14,9 +14,15 @@
     <li><a href="{{path('card-deck')}}">card/deck</a> - Se hela kortleken (sorterad)</li>
     <li><a href="{{path('card-deck-shuffle')}}">card/deck/shuffle</a> - Blanda kortleken</li>
     <li><a href="{{path('card-draw')}}">card/deck/draw</a> - Dra 1 kort</li>
-    <li><a href="{{path('card-draw-number', {number: '0'})}}">card/deck/draw/:number</a> - Dra angivet antal kort</li>
-    <li><a href="{{path('card-deal', {players: '4', cards: '4'})}}">card/deck/deal/:players/:cards</a> - Dra angivet antal kort per angivet antal spelare</li>
+    <li><a href="{{path('card-draw-number', {number: '0'})}}">card/deck/draw/:antal</a> - Dra angivet antal kort</li>
+    <li><a href="{{path('card-deal', {players: '3', cards: '4'})}}">card/deck/deal/:spelare/:kort</a> - Dra angivet antal kort per angivet antal spelare (standard 3 spelare, 4 kort)</li>
     <li><a href="{{path('card-deck2')}}">card/deck2</a> - Se hela kortleken med 2 jokrar</li>
+</ul>
+
+<h2>JSON-api</h2>
+<ul>
+    <li><a href="{{path('card-api-deck')}}">card/api/deck</a> - Se hela kortleken (sorterad)</li>
+    <li><a href="{{path('card-api-deal', {players: '3', cards: '4'})}}">card/api/deck/deal/:spelare/:kort</a> - Dra angivet antal kort per angivet antal spelare (standard 3 spelare, 4 kort)</li>
 </ul>
 
 {% endblock %}

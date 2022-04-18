@@ -4,17 +4,18 @@ namespace App\Card;
 
 class Card
 {
-    public $colour;
-    public $value;
-    protected $name;
+    protected string $colour;
+    protected string $value;
+    protected string $name;
 
     public function __construct($colour, $value)
     {
         $this->colour = $colour;
         $this->value = $value;
+        $this->generateName();
     }
 
-    public function getAsString(): string
+    public function generateName(): void
     {
         switch ($this->colour){
             case "spades":
@@ -51,7 +52,31 @@ class Card
             default:
                 $this->name .= $this->value;
         }
-        
-        return "[{$this->name}]";
+    }
+
+    public function getColour(): string
+    {
+        return $this->colour;   
+    }
+
+    public function getValue(): string
+    {
+        return $this->value;   
+    }
+
+    public function getName(): string
+    {
+        return $this->name;   
+    }
+
+    public function toArray(): array
+    {
+        $card = [
+            "colour" => $this->colour,
+            "value" => $this->value,
+            "name" => $this->name
+        ];
+
+        return $card;
     }
 }

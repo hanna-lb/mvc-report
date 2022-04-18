@@ -22,4 +22,15 @@ class Player
     {
         return $this->hand;
     }
+
+    public function toArray(): array
+    {
+        $array = [];
+
+        foreach ($this->hand as $card) {
+            $array[] = $card->toArray();
+        }
+
+        return $array;
+    }
 }

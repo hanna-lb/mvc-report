@@ -46,4 +46,15 @@ class Deck
     {
         return count($this->deck);
     }
+
+    public function toArray(): array
+    {
+        $array = [];
+
+        foreach ($this->deck as $card) {
+            $array[] = $card->toArray();
+        }
+
+        return $array;
+    }
 }
