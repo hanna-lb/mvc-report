@@ -128,18 +128,31 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/deal/:{players}/:{cards}", name="card-deal", methods={"GET","HEAD"})
      */
-    public function deal($players, $cards): Response 
+    public function deal(SessionInterface $session, $players, $cards): Response 
     {
-        $deck = new \App\Card\Deck();
-        $deck->shuffle();
+        $deck = $session->get("deck") ?? new \App\Card\Deck();
+        $playerObjects = $session->get("playerObjects") ?? [];
 
-        $playerHands = [];
+        $deck->shuffle();
         
+        $playerHands = [];
+
         for ($i = 0; $i < $players; $i++) {
-            $playerHands[] = $deck->drawCard($cards);
+            $drawnCards = $deck->drawCard($cards);
+            
+            if (array_key_exists($i, $playerObjects)) {
+                $playerObjects[$i]->addCards($drawnCards);
+            } else {
+                $playerObjects[] = new \App\Card\Player($drawnCards);
+            }
+
+            $playerHands[] = $playerObjects[$i]->getHand();
         }
 
         $cardsLeft = $deck->countDeck();
+
+        $session->set("deck", $deck);
+        $session->set("playerObjects", $playerObjects);
 
         $data = [
             'title' => "Dela ut kort till spelare",
@@ -149,16 +162,22 @@ class CardController extends AbstractController
             'count' => $cardsLeft,
         ];
 
-        return $this->render('card/deal.html.twig', $data);
+        return $this->render('card/deal.html.twig', $data);        
     }
 
     /**
      * @Route("/card/deck/deal/:{players}/:{cards}", name="card-deal-process", methods={"POST"})
      */
-    public function dealProcess(Request $request, $players, $cards): Response 
+    public function dealProcess(Request $request, SessionInterface $session, $players, $cards): Response 
     {
-        $players = $request->request->get('players');
         $cards = $request->request->get('cards');
+
+        $reset = $request->request->get('reset');
+
+        if ($reset) {
+            $players = $request->request->get('players');
+            $session->clear();
+        }
 
         return $this->redirectToRoute('card-deal', ['players' => $players, 'cards' => $cards]);
     }

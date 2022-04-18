@@ -19,17 +19,17 @@ class Deck
         }
     }
 
-    public function getDeck()
+    public function getDeck(): array
     {
         return $this->deck;
     }
 
-    public function shuffle()
+    public function shuffle(): void
     {
         shuffle($this->deck);
     }
 
-    public function drawCard($quantity = 1)
+    public function drawCard($quantity = 1): array
     {
         $cards = [];
         
@@ -42,7 +42,8 @@ class Deck
         return $cards;
     }
 
-    public function countDeck() {
+    public function countDeck(): int 
+    {
         return count($this->deck);
     }
 }

@@ -10,7 +10,7 @@
 <form method="post">
     <fieldset>
     <p>
-        <label>Antal spelare:
+        <label>Antal spelare (ändras bara vid nytt spel):
             <input type="number" name="players" value="{{ players }}" max="52" min="0" step="1">
         </label>
     </p>
@@ -20,7 +20,8 @@
         </label>
     </p>
     <p>
-        <input type="submit" value="Nytt spel">
+        <input type="submit" name="draw" value="Dra kort">
+        <input type="submit" name="reset" value="Nytt spel">
     </p>
     </fieldset>
 </form>

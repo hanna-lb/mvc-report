@@ -46,6 +46,8 @@ class Card
             case "K":
                 $this->name .= "kung";
                 break;
+            case "Joker":
+                $this->name = "Joker";
             default:
                 $this->name .= $this->value;
         }
