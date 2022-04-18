@@ -10,6 +10,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
+use App\Card\Deck;
+
 class CardController extends AbstractController
 {
     /**
@@ -25,7 +27,7 @@ class CardController extends AbstractController
      */
     public function deck(): Response
     {
-        $deck = new \App\Card\Deck();
+        $deck = new Deck();
 
         $data = [
             'title' => 'Sorterad kortlek',
@@ -41,7 +43,7 @@ class CardController extends AbstractController
     public function shuffleDeck(SessionInterface $session): Response
     {
         $session->clear();
-        $deck = new \App\Card\Deck();
+        $deck = new Deck();
         $deck->shuffle();
 
         $data = [
@@ -57,7 +59,7 @@ class CardController extends AbstractController
      */
     public function draw(SessionInterface $session): Response
     {
-        $deck = $session->get("deck") ?? new \App\Card\Deck();
+        $deck = $session->get("deck") ?? new Deck();
         $deck->shuffle();
 
         $drawnCards = $deck->drawCard(1);
@@ -85,7 +87,7 @@ class CardController extends AbstractController
      */
     public function drawNumber(SessionInterface $session, $number): Response 
     {
-        $deck = $session->get("deck") ?? new \App\Card\Deck();
+        $deck = $session->get("deck") ?? new Deck();
         $deck->shuffle();
 
         $drawnCards = $deck->drawCard($number);
@@ -130,7 +132,7 @@ class CardController extends AbstractController
      */
     public function deal(SessionInterface $session, $players, $cards): Response 
     {
-        $deck = $session->get("deck") ?? new \App\Card\Deck();
+        $deck = $session->get("deck") ?? new Deck();
         $playerObjects = $session->get("playerObjects") ?? [];
 
         $deck->shuffle();
@@ -180,5 +182,20 @@ class CardController extends AbstractController
         }
 
         return $this->redirectToRoute('card-deal', ['players' => $players, 'cards' => $cards]);
+    }
+
+    /**
+     * @Route("/card/deck2", name="card-deck2")
+     */
+    public function deck2(): Response
+    {
+        $deck = new \App\Card\DeckWithJoker();
+
+        $data = [
+            'title' => 'Kortlek med jokrar',
+            'deck' => $deck->getDeck(),
+        ];
+
+        return $this->render('card/deck.html.twig', $data);
     }
 }
