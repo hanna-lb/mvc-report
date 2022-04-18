@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
 use App\Card\Deck;
 
 class CardController extends AbstractController
@@ -67,7 +66,7 @@ class CardController extends AbstractController
 
         $hand = $session->get("hand") ?? [];
         $hand = array_merge($hand, $drawnCards);
-        
+
         $session->set("deck", $deck);
         $session->set("hand", $hand);
 
@@ -85,7 +84,7 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/draw/:{number}", name="card-draw-number", methods={"GET","HEAD"})
      */
-    public function drawNumber(SessionInterface $session, $number): Response 
+    public function drawNumber(SessionInterface $session, $number): Response
     {
         $deck = $session->get("deck") ?? new Deck();
         $deck->shuffle();
@@ -95,7 +94,7 @@ class CardController extends AbstractController
 
         $hand = $session->get("hand") ?? [];
         $hand = array_merge($hand, $drawnCards);
-        
+
         $session->set("deck", $deck);
         $session->set("hand", $hand);
 
@@ -113,7 +112,7 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/draw/:{number}", name="card-draw-process", methods={"POST"})
      */
-    public function drawNumberProcess(Request $request, SessionInterface $session, $number): Response 
+    public function drawNumberProcess(Request $request, SessionInterface $session, $number): Response
     {
         $draw = $request->request->get('draw');
         $reset = $request->request->get('reset');
@@ -130,18 +129,18 @@ class CardController extends AbstractController
     /**
      * @Route("/card/deck/deal/:{players}/:{cards}", name="card-deal", methods={"GET","HEAD"})
      */
-    public function deal(SessionInterface $session, $players, $cards): Response 
+    public function deal(SessionInterface $session, $players, $cards): Response
     {
         $deck = $session->get("deck") ?? new Deck();
         $playerObjects = $session->get("playerObjects") ?? [];
 
         $deck->shuffle();
-        
+
         $playerHands = [];
 
         for ($i = 0; $i < $players; $i++) {
             $drawnCards = $deck->drawCard($cards);
-            
+
             if (array_key_exists($i, $playerObjects)) {
                 $playerObjects[$i]->addCards($drawnCards);
             } else {
@@ -164,13 +163,13 @@ class CardController extends AbstractController
             'count' => $cardsLeft,
         ];
 
-        return $this->render('card/deal.html.twig', $data);        
+        return $this->render('card/deal.html.twig', $data);
     }
 
     /**
      * @Route("/card/deck/deal/:{players}/:{cards}", name="card-deal-process", methods={"POST"})
      */
-    public function dealProcess(Request $request, SessionInterface $session, $players, $cards): Response 
+    public function dealProcess(Request $request, SessionInterface $session, $players, $cards): Response
     {
         $cards = $request->request->get('cards');
 

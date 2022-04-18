@@ -6,7 +6,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 use App\Card\Deck;
 
 class CardJSONController extends AbstractController
@@ -28,11 +27,11 @@ class CardJSONController extends AbstractController
     /**
      * @Route("/card/api/deal/:{players}/:{cards}", name="card-api-deal", methods={"GET"})
      */
-    public function dealJSON($players, $cards): Response 
+    public function dealJSON($players, $cards): Response
     {
         $deck = new Deck();
         $deck->shuffle();
-        $playerObjects = [];        
+        $playerObjects = [];
         $playerHands = [];
 
         for ($i = 0; $i < $players; $i++) {
@@ -51,6 +50,6 @@ class CardJSONController extends AbstractController
             'players' => $playerHands,
         ];
 
-        return new JsonResponse($data);        
+        return new JsonResponse($data);
     }
 }

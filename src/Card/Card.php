@@ -17,7 +17,7 @@ class Card
 
     public function generateName(): void
     {
-        switch ($this->colour){
+        switch ($this->colour) {
             case "spades":
                 $this->name = "Spader ";
                 break;
@@ -33,8 +33,8 @@ class Card
             default:
                 $this->name = "";
         }
-        
-        switch ($this->value){
+
+        switch ($this->value) {
             case "E":
                 $this->name .= "ess";
                 break;
@@ -49,6 +49,7 @@ class Card
                 break;
             case "Joker":
                 $this->name = "Joker";
+                // no break
             default:
                 $this->name .= $this->value;
         }
@@ -56,17 +57,17 @@ class Card
 
     public function getColour(): string
     {
-        return $this->colour;   
+        return $this->colour;
     }
 
     public function getValue(): string
     {
-        return $this->value;   
+        return $this->value;
     }
 
     public function getName(): string
     {
-        return $this->name;   
+        return $this->name;
     }
 
     public function toArray(): array

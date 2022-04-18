@@ -32,7 +32,7 @@ class Deck
     public function drawCard($quantity = 1): array
     {
         $cards = [];
-        
+
         if (count($this->deck) >= $quantity) {
             $cards = array_splice($this->deck, 0, $quantity);
         } else {
@@ -42,7 +42,7 @@ class Deck
         return $cards;
     }
 
-    public function countDeck(): int 
+    public function countDeck(): int
     {
         return count($this->deck);
     }
