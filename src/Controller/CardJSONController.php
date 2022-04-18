@@ -31,10 +31,8 @@ class CardJSONController extends AbstractController
     public function dealJSON($players, $cards): Response 
     {
         $deck = new Deck();
-        $playerObjects = [];
-
         $deck->shuffle();
-        
+        $playerObjects = [];        
         $playerHands = [];
 
         for ($i = 0; $i < $players; $i++) {

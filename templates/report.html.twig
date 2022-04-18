@@ -44,7 +44,33 @@
 
 <article>
 <h2>Kmom02</h2>
-<p>Redovisningstext</p>
+<p>
+    I föregående moment beskrev jag klasser och objekt. I denna uppgift började vi gräva ned oss lite djupare med arv, komposition, interface och trait. Arv är en 
+    förlängning av en klass. För att exemplifiera detta med koden jag jobbat med så har jag en klass Deck för en kortlek och en klass DeckWithJoker som har sin grund i 
+    den vanliga kortleken, men där har jag även lagt till kod som lägger till två joker-kort i kortleken. Därmed ärver DeckWithJoker sina properties och metoder från Deck, 
+    och inom objektorienterad programmering benämns de som förälder (Deck) och barn (DeckWithJoker). På detta vis kan man återanvända övergripande kod. Komposition handlar 
+    om kopplingen mellan objekt och att objektet kan existera utan det andra objektet. I mitt fall kan en kortlek existera utan kort, och korten kan existera även om det 
+    inte finns en kortlek, vilket istället är ett exempel på en aggregation. Istället kan ett exempel på en komposition vara en ett spel och en session. Spelet 
+    kan inte existera utanför sessionen. När det kommer till interface kan man säga att det utgör en mall för beteenden av klasser. Den kan återanvändas av flera klasser. 
+    Det är inget jag använt mig utav, men jag ser fortfarande nyttan i det. En klass kan implementera ett interface, och i interface kan vi namnge funktioner vi säger ska 
+    existera i klassen. Själva beteendet sätter vi däremot i respektive klass för den funktionen. Har vi ett interface med tre funktioner specificerade i sig och den 
+    implementeras i olika klasser, då måste alla klasserna med det interfacet har samtliga tre funktioner i sig. Trait är inte heller något jag använt mig utav ännu, 
+    men är ett sätt att återanvända kod utöver arv. Detta då klasser inte kan ärva från flera olika klasser samtidigt. Jag gillar exemplet som ges där man använder traits 
+    för att konstruera ett histogram för ett spel. Skulle jag göra flera spel där jag vill lagra olika high scores för samtliga spel är det rimligt att jag gör den koden 
+    återanvändbar, och där hade traits kunnat vara lämpligt.
+</p>
+<p>
+    Jag tyckte uppgiften inte var helt lätt att lösa och framförallt väldigt maffig. Jag har inte byggt något spel ännu, men byggde upp klasser för kort, kortlek, kortlek 
+    med joker som ärver kortlek, samt en klass för spelare. En kortlek byggs upp av kort-objekt. En spelare är egentligen en hand med kort, där ett spelar-objekt skapas med 
+    en array av kort. Det är för att kunna ha flera instanser av utdelade kort parallellt med en kortlek som vi tagit korten från. Redan här har jag märkt att jag kan 
+    förbättra min kod genom att göra den mer återanvändningsbar. Jag ser fram emot att bryta ut delar av kod som lämpar sig för att återanvändas. Jag måste säga att jag ändå 
+    är nöjd med hur jag genererat mina kort i CSS. Utseendet styrs med css utifrån vad för värde och svit som kortet har, vilket är värden vi får från php-koden. Ärligt har 
+    jag nog lagt för mycket tid bara på att få det att se vettigt ut, men samtidigt är det roligt när det konkret synliga växer fram.
+</p>
+<p>
+    Min TIL detta moment är att jag har lärt mig mer hur PHP struktureras och fungerar samt hur man hanterar återanvändning av kod på olika sätt. Jag har också fått brottas 
+    rätt duktigt att få ut värderna från de nestlade arrayerna, men jag tror det börjar klicka nu.
+</p>
 </article>
 
 <article>
